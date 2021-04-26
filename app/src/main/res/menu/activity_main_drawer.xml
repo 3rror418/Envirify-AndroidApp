@@ -6,10 +6,10 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/app_bar_search"
+            android:id="@+id/app_buscarLugar"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Buscar lugar"
-            app:actionViewClass="android.widget.SearchView" />
+            android:title="Buscar Lugar"
+            app:actionViewClass="android.widget.SearchView"></item>
         <item
             android:id="@+id/nav_verPerfil"
             android:icon="@android:drawable/ic_menu_view"
@@ -23,13 +23,16 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mis Reservas" />
         <item
+            android:id="@+id/nav_misLugares"
             android:icon="@android:drawable/ic_menu_myplaces"
             android:title="Mis Lugares" />
         <item
-            android:icon="@drawable/ic_checked_checkbox"
+            android:id="@+id/nav_reservasParaMi"
+            android:icon="?android:attr/textCheckMark"
             android:title="Reservas para mi" />
         <item
+            android:id="@+id/nav_agregarLugar"
             android:icon="@android:drawable/ic_input_add"
-            android:title="Añadir Lugar" />
+            android:title="Agregar Lugar" />
     </group>
 </menu>
