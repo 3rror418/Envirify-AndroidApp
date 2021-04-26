@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Envirify"
+rootProject.name = "My Application"
