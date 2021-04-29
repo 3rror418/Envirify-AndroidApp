@@ -1,33 +1,49 @@
 package edu.eci.ieti.myapplication;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import android.app.SearchManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+
+import com.google.android.material.navigation.NavigationView;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import edu.eci.ieti.myapplication.model.LoginWrapper;
+import edu.eci.ieti.myapplication.model.Place;
+import edu.eci.ieti.myapplication.model.Token;
+import edu.eci.ieti.myapplication.services.AuthService;
+import edu.eci.ieti.myapplication.services.PlaceService;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class SearchActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private EditText editTextPlace;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(1);
+    private PlaceService placeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,14 +88,37 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    public void Search(View view) {
+        loadComponents();
+        String search = editTextPlace.getText().toString();
+        if (search.isEmpty()) {
+            editTextPlace.setError("El parametro de busqueda no puede estar vacio");
+        } else {
+            executorService.execute(() -> {
+                try {
+                    Response<List<Place>> response =
+                            placeService.searchPlaces(search).execute();
+                    runOnUiThread(() -> {
+                        if (response.isSuccessful()) {
+                            List<Place> places = response.body();
+                            System.out.println(places);
+                        } else {
+                            editTextPlace.setError("Error de Conexion con BackEnd");
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
 
-    public void makeLogout(View view) {
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(LaunchActivity.TOKEN_KEY);
-        editor.apply();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+    private void loadComponents() {
+        editTextPlace = findViewById(R.id.placeText);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://enfiry-back-end.herokuapp.com/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        placeService = retrofit.create(PlaceService.class);
     }
 }
