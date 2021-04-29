@@ -44,34 +44,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        mAppBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
-                .setOpenableLayout(drawer)
-                .build();
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(menuItem -> {
-            int id = menuItem.getItemId();
-            //System.out.println("Hice click en una opcion del menu");
-            //it's possible to do more actions on several items, if there is a large amount of items I prefer switch(){case} instead of if()
-            if (id == R.id.app_buscarLugar) {
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
-                //System.out.println("Hice click en buscar");
-            }
-            //This is for maintaining the behavior of the Navigation view
-            NavigationUI.onNavDestinationSelected(menuItem, navController);
-            //This is for closing the drawer after acting on it
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        });
     }
 
     @Override
@@ -114,7 +86,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void loadComponents() {
-        editTextPlace = findViewById(R.id.placeText);
+        editTextPlace = findViewById(R.id.searchText);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://enfiry-back-end.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
