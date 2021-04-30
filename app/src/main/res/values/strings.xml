@@ -10,4 +10,14 @@
     <string name="menu_home">Envirify</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="add_name">Name</string>
+    <string name="add_department">Department</string>
+    <string name="add_capacity">Capacity</string>
+    <string name="add_city">City</string>
+    <string name="add_direction">Direction</string>
+    <string name="add_bathrooms">Bathrooms</string>
+    <string name="add_description">Description</string>
+    <string name="add_habitations">Habitations</string>
+    <string name="add_urlImage">UrlImage</string>
+
 </resources>

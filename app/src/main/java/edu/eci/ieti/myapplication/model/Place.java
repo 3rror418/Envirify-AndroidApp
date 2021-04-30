@@ -1,5 +1,6 @@
 package edu.eci.ieti.myapplication.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Place {
@@ -17,6 +18,19 @@ public class Place {
     private List<String> ratings;
 
     public Place() {
+    }
+
+    public Place(String name, String department, String city, String direction, String description, String urlImage, int capacity, int habitations, int bathrooms) {
+        this.name = name;
+        this.department = department;
+        this.city = city;
+        this.direction = direction;
+        this.description = description;
+        this.urlImage = urlImage;
+        this.capacity = capacity;
+        this.habitations = habitations;
+        this.bathrooms = bathrooms;
+        this.ratings= new ArrayList<>();
     }
 
     public String getId() {

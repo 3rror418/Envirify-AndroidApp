@@ -50,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 //System.out.println("Hice click en buscar");
             }
+
+            if (id==R.id.nav_agregarLugar){
+                Intent intent = new Intent(this, AddActivity.class);
+                startActivity(intent);
+                System.out.println("Hice click en add");
+
+            }
             //This is for maintaining the behavior of the Navigation view
             NavigationUI.onNavDestinationSelected(menuItem, navController);
             //This is for closing the drawer after acting on it
