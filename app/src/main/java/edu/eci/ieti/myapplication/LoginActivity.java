@@ -75,6 +75,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called When The User Taps The Login Button
+     */
+    public void redirectToRegister(View view) {
+        Intent intent = new Intent(getApplicationContext(), ActivityRegister.class);
+        startActivity(intent);
+    }
+
     private void loadComponents() {
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
