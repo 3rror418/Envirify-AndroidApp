@@ -1,24 +1,16 @@
 package edu.eci.ieti.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.app.SearchManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-
-import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,10 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import edu.eci.ieti.myapplication.model.Card;
-import edu.eci.ieti.myapplication.model.LoginWrapper;
 import edu.eci.ieti.myapplication.model.Place;
-import edu.eci.ieti.myapplication.model.Token;
-import edu.eci.ieti.myapplication.services.AuthService;
 import edu.eci.ieti.myapplication.services.PlaceService;
 import edu.eci.ieti.myapplication.ui.CardArrayAdapter;
 import retrofit2.Response;
