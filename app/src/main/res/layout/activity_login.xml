@@ -16,14 +16,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/envirify" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="TASKS MANAGER APP"
+        android:text="@string/login_name"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"

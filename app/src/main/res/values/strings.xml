@@ -19,5 +19,6 @@
     <string name="add_description">Description</string>
     <string name="add_habitations">Habitations</string>
     <string name="add_urlImage">UrlImage</string>
+    <string name="login_name">Envirify</string>
 
 </resources>

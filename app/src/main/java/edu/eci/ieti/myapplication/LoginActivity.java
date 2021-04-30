@@ -14,13 +14,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import edu.eci.ieti.myapplication.model.LoginWrapper;
-import edu.eci.ieti.myapplication.model.Token;
+import edu.eci.ieti.myapplication.model.LoginResponse;
 import edu.eci.ieti.myapplication.services.AuthService;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
+
+    public static final String USERNAME_ID = "USERNAME_ID";
+    public static final String USERNAME_EMAIL = "USERNAME_EMAIL";
+
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private EditText editTextEmail;
@@ -46,13 +50,15 @@ public class LoginActivity extends AppCompatActivity {
         if (!email.isEmpty() && !password.isEmpty()) {
             executorService.execute(() -> {
                 try {
-                    Response<Token> response =
+                    Response<LoginResponse> response =
                             authService.login(new LoginWrapper(email, password)).execute();
-                    Token token = response.body();
+                    LoginResponse loginResponse = response.body();
                     runOnUiThread(() -> {
                         if (response.isSuccessful()) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString(LaunchActivity.TOKEN_KEY, token.getAccessToken());
+                            editor.putString(LaunchActivity.TOKEN_KEY, loginResponse.getJwt());
+                            editor.putString(USERNAME_EMAIL, loginResponse.getUsername());
+                            editor.putString(USERNAME_ID, loginResponse.getId());
                             editor.apply();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
@@ -74,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         //localhost for emulator
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080") //localhost for emulator
+                .baseUrl("https://enfiry-back-end.herokuapp.com/api/v1/") //localhost for emulator
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         authService = retrofit.create(AuthService.class);
