@@ -14,15 +14,17 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AddActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="@string/app_name">
+        <activity android:name=".ActivityRegister"></activity>
+        <activity
+            android:name=".AddActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity">
+
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".SearchActivity"
             android:label="@string/app_name"

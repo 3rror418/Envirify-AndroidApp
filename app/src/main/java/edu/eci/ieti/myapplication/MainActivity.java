@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -65,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void logout(MenuItem item) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(LaunchActivity.TOKEN_KEY);
+        editor.remove(LoginActivity.USERNAME_EMAIL);
+        editor.remove(LoginActivity.USERNAME_ID);
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -80,13 +92,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void makeLogout(View view) {
-        SharedPreferences sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(LaunchActivity.TOKEN_KEY);
-        editor.apply();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }
