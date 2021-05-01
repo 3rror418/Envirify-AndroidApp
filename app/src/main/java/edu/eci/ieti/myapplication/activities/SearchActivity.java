@@ -1,4 +1,4 @@
-package edu.eci.ieti.myapplication;
+package edu.eci.ieti.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.model.Card;
 import edu.eci.ieti.myapplication.model.Place;
 import edu.eci.ieti.myapplication.services.PlaceService;

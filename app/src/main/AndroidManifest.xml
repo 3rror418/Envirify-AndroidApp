@@ -14,29 +14,39 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ActivityRegister"></activity>
+
+        <activity android:name=".activities.ActivityRegister" />
         <activity
-            android:name=".AddActivity"
+            android:name=".activities.AddActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SearchActivity"
+            android:name=".activities.MyBookingsActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.SearchActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.MainActivity">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".LaunchActivity"
+            android:name=".activities.LaunchActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
@@ -45,9 +55,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activities.LoginActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyApplication.NoActionBar" />
     </application>
