@@ -1,12 +1,15 @@
-package edu.eci.ieti.myapplication.ui;
+package edu.eci.ieti.myapplication.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,11 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.eci.ieti.myapplication.R;
+import edu.eci.ieti.myapplication.activities.AddBookActivity;
+import edu.eci.ieti.myapplication.activities.SearchActivity;
 import edu.eci.ieti.myapplication.model.Card;
 
 public class CardArrayAdapter extends ArrayAdapter<Card> {
 
     private final List<Card> cardList = new ArrayList<>();
+    private SearchActivity searchActivity;
 
     static class CardViewHolder {
         ImageView image;
@@ -29,10 +35,12 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         TextView calificacion;
         TextView description;
         TextView propietario;
+        Button bookButton;
     }
 
-    public CardArrayAdapter(Context context, int textViewResourceId) {
+    public CardArrayAdapter(Context context, int textViewResourceId, SearchActivity searchActivity) {
         super(context, textViewResourceId);
+        this.searchActivity = searchActivity;
     }
 
     @Override
@@ -65,6 +73,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
             viewHolder.calificacion = row.findViewById(R.id.place_calification);
             viewHolder.description = row.findViewById(R.id.place_description);
             viewHolder.propietario = row.findViewById(R.id.place_owner);
+            viewHolder.bookButton = row.findViewById(R.id.makebookButton);
             row.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) row.getTag();
@@ -77,6 +86,11 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         viewHolder.calificacion.setText(String.format("%s de 5", score));
         viewHolder.description.setText(card.getDescription());
         viewHolder.propietario.setText(card.getOwner());
+        viewHolder.bookButton.setOnClickListener(onClickListener -> {
+            searchActivity.putItemSelectedId(card.getId());
+            Intent intent = new Intent(searchActivity.getApplicationContext(), AddBookActivity.class);
+            searchActivity.startActivity(intent);
+        });
         return row;
     }
 
