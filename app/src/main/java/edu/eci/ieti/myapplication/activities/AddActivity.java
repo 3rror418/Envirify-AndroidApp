@@ -1,4 +1,4 @@
-package edu.eci.ieti.myapplication;
+package edu.eci.ieti.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -6,6 +6,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -39,6 +41,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText editTextHabitations;
     private EditText editTextBathrooms;
     private PlaceService placeService;
+    private SharedPreferences sharedPref;
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
@@ -62,7 +65,7 @@ public class AddActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public void onSubmitAdd(View view){
+    public void onSubmitAdd(View view) {
         loadComponents();
         String name = editTextName.getText().toString();
         String department = editTextDepartment.getText().toString();
@@ -77,10 +80,12 @@ public class AddActivity extends AppCompatActivity {
         if (name.isEmpty()) {
             editTextName.setError("El parametro de nombre no puede estar vacio");
         } else {
+            String email = sharedPref.getString(LoginActivity.USERNAME_EMAIL, "noexiste@gmail.com");
+            ;
             executorService.execute(() -> {
                 try {
                     Response<ResponseBody> response =
-                            placeService.addPlace(new Place(name,department,city,direction,description,urlImg,capacity,habitations,bathrooms),"bivianasanchez99@gmail.com").execute();
+                            placeService.addPlace(new Place(name, department, city, direction, description, urlImg, capacity, habitations, bathrooms), email).execute();
                     runOnUiThread(() -> {
                         if (response.isSuccessful()) {
                             System.out.println("suuu");
@@ -97,21 +102,20 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void loadComponents() {
+        sharedPref = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://enfiry-back-end.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         placeService = retrofit.create(PlaceService.class);
-        editTextName =  findViewById(R.id.AddName);
-        editTextDepartment =  findViewById(R.id.AddDepartment);
+        editTextName = findViewById(R.id.AddName);
+        editTextDepartment = findViewById(R.id.AddDepartment);
         editTextCity = findViewById(R.id.AddCity);
-        editTextDirection =  findViewById(R.id.AddDirection);
-
-
-        editTextDescription =  findViewById(R.id.AddDescription);
+        editTextDirection = findViewById(R.id.AddDirection);
+        editTextDescription = findViewById(R.id.AddDescription);
         editTextCapacity = findViewById(R.id.AddCapacity);
         editTextHabitations = findViewById(R.id.AddHabitations);
-        editTextBathrooms =  findViewById(R.id.AddBathrooms);
+        editTextBathrooms = findViewById(R.id.AddBathrooms);
 
     }
 }

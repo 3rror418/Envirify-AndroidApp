@@ -1,4 +1,4 @@
-package edu.eci.ieti.myapplication;
+package edu.eci.ieti.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.model.LoginWrapper;
 import edu.eci.ieti.myapplication.model.LoginResponse;
 import edu.eci.ieti.myapplication.services.AuthService;
@@ -57,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(LaunchActivity.TOKEN_KEY, loginResponse.getJwt());
-                            editor.putString(USERNAME_EMAIL, loginResponse.getUsername());
+                            editor.putString(USERNAME_EMAIL, loginResponse.getEmail());
                             editor.putString(USERNAME_ID, loginResponse.getId());
                             editor.apply();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

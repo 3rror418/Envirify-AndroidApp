@@ -1,17 +1,14 @@
-package edu.eci.ieti.myapplication;
+package edu.eci.ieti.myapplication.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import edu.eci.ieti.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 //System.out.println("Hice click en buscar");
             }
-
             if (id==R.id.nav_agregarLugar){
                 Intent intent = new Intent(this, AddActivity.class);
                 startActivity(intent);
-                System.out.println("Hice click en add");
-
+                //System.out.println("Hice click en add");
+            }
+            if(id==R.id.nav_misReservas){
+                Intent intent = new Intent(this, MyBookingsActivity.class);
+                startActivity(intent);
             }
             //This is for maintaining the behavior of the Navigation view
             NavigationUI.onNavDestinationSelected(menuItem, navController);
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         editor.remove(LaunchActivity.TOKEN_KEY);
         editor.remove(LoginActivity.USERNAME_EMAIL);
         editor.remove(LoginActivity.USERNAME_ID);
+        editor.apply();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

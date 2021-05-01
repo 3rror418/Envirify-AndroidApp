@@ -1,4 +1,4 @@
-package edu.eci.ieti.myapplication;
+package edu.eci.ieti.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.model.RegisterWrapper;
 import edu.eci.ieti.myapplication.services.RegisterService;
 import retrofit2.Response;
