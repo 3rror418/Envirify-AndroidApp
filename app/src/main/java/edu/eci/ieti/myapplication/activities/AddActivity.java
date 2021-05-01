@@ -12,18 +12,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import edu.eci.ieti.myapplication.R;
-import edu.eci.ieti.myapplication.model.Card;
 import edu.eci.ieti.myapplication.model.Place;
 import edu.eci.ieti.myapplication.services.PlaceService;
-import edu.eci.ieti.myapplication.ui.CardArrayAdapter;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;

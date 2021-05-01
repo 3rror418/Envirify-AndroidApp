@@ -1,4 +1,4 @@
-package edu.eci.ieti.myapplication.ui;
+package edu.eci.ieti.myapplication.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
