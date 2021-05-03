@@ -2,7 +2,6 @@ package edu.eci.ieti.myapplication.ui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -20,7 +19,6 @@ import java.util.List;
 
 import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.activities.AddBookActivity;
-import edu.eci.ieti.myapplication.activities.MyPlaces;
 import edu.eci.ieti.myapplication.activities.SearchActivity;
 import edu.eci.ieti.myapplication.model.Card;
 

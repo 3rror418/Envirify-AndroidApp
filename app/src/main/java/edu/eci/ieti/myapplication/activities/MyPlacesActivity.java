@@ -1,5 +1,6 @@
 package edu.eci.ieti.myapplication.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -7,10 +8,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,19 +29,21 @@ import edu.eci.ieti.myapplication.model.Place;
 import edu.eci.ieti.myapplication.services.PlaceService;
 import edu.eci.ieti.myapplication.ui.adapters.CardArrayAdapter;
 import edu.eci.ieti.myapplication.ui.adapters.CardPlaceArrayAdapter;
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MyPlaces extends AppCompatActivity {
+public class MyPlacesActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
     private SharedPreferences sharedPreferences;
     private PlaceService placeService;
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     private ListView listView;
     private CardPlaceArrayAdapter cardArrayAdapter;
+    private AlertDialog.Builder builder;
+    private Button deleteButton;
 
     public static final String SELECTED_PLACE_ID = "SELECTED_PLACE_ID";
 
@@ -53,8 +59,7 @@ public class MyPlaces extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (response.isSuccessful()) {
                         List<Place> places = response.body();
-                        System.out.println(response.body());
-                        listView = (ListView) findViewById(R.id.card_listView);
+                        listView = findViewById(R.id.card_listView);
                         listView.addHeaderView(new View(this));
                         listView.addFooterView(new View(this));
                         cardArrayAdapter = new CardPlaceArrayAdapter(getApplicationContext(), R.layout.list_item_card_place, this);
@@ -82,14 +87,9 @@ public class MyPlaces extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 
     private void loadComponents() {
+        builder = new AlertDialog.Builder(this);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://enfiry-back-end.herokuapp.com/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -105,5 +105,45 @@ public class MyPlaces extends AppCompatActivity {
         }
         editor.putString(SELECTED_PLACE_ID, id);
         editor.apply();
+    }
+
+    public void deletePlace() {
+        System.out.println("Hice click en delete");
+        builder.setTitle("Confirmación de Eliminación");
+        builder.setMessage("¿Estas seguro de eliminar la información de este lugar, toda la información se perdera?");
+        builder.setPositiveButton("Aceptar", this::deletePlaceById);
+        builder.setNegativeButton("Cancelar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void deletePlaceById(DialogInterface dialog, int which) {
+        String placeId = sharedPreferences.getString(SELECTED_PLACE_ID, "");
+        String email = sharedPreferences.getString(LoginActivity.USERNAME_EMAIL, "");
+        if (placeId.isEmpty() || email.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Intentelo mas tarde", Toast.LENGTH_LONG);
+            toast.show();
+        } else {
+            executorService.execute(() -> {
+                try {
+                    Response<ResponseBody> response = placeService.deletePlace(placeId, email).execute();
+                    runOnUiThread(() -> {
+                        Toast toast;
+                        String message;
+                        if (response.isSuccessful()) {
+                            message = "Hospedaje Eliminado";
+                        } else {
+                            System.out.println(response);
+                            message = response.message();
+                        }
+                        System.out.println(message);
+                        toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG);
+                        toast.show();
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
     }
 }

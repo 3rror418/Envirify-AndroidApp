@@ -39,13 +39,6 @@
 			android:text="Ciudad, Departamento" />
 
 		<TextView
-			android:id="@+id/place_calification"
-			android:layout_width="211dp"
-			android:layout_height="wrap_content"
-			android:fontFamily="sans-serif-condensed"
-			android:text="Calificacion" />
-
-		<TextView
 			android:id="@+id/place_description"
 			android:layout_width="351dp"
 			android:layout_height="wrap_content"
