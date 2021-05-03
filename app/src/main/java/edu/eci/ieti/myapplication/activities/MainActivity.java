@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MyBookingsActivity.class);
                 startActivity(intent);
             }
+            if(id==R.id.nav_misLugares){
+                Intent intent = new Intent(this, MyPlaces.class);
+                startActivity(intent);
+            }
             //This is for maintaining the behavior of the Navigation view
             NavigationUI.onNavDestinationSelected(menuItem, navController);
             //This is for closing the drawer after acting on it

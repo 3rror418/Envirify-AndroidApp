@@ -77,7 +77,6 @@ public class AddActivity extends AppCompatActivity {
             editTextName.setError("El parametro de nombre no puede estar vacio");
         } else {
             String email = sharedPref.getString(LoginActivity.USERNAME_EMAIL, "noexiste@gmail.com");
-            ;
             executorService.execute(() -> {
                 try {
                     Response<ResponseBody> response =
