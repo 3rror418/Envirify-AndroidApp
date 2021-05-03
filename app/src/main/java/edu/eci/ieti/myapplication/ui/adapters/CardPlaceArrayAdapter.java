@@ -1,7 +1,6 @@
 package edu.eci.ieti.myapplication.ui.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -18,27 +17,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.eci.ieti.myapplication.R;
-import edu.eci.ieti.myapplication.activities.AddBookActivity;
-import edu.eci.ieti.myapplication.activities.MyPlaces;
-import edu.eci.ieti.myapplication.activities.SearchActivity;
+import edu.eci.ieti.myapplication.activities.MyPlacesActivity;
 import edu.eci.ieti.myapplication.model.Card;
 
 public class CardPlaceArrayAdapter extends ArrayAdapter<Card> {
 
     private final List<Card> cardList = new ArrayList<>();
-    private MyPlaces myPlaces;
+    private MyPlacesActivity myPlaces;
 
     static class CardPlaceViewHolder {
         ImageView image;
         TextView name;
         TextView address; // department+city
-        TextView calificacion;
         TextView description;
         TextView propietario;
         Button deleteButton;
     }
 
-    public CardPlaceArrayAdapter(Context context, int textViewResourceId, MyPlaces myPlaces) {
+    public CardPlaceArrayAdapter(Context context, int textViewResourceId, MyPlacesActivity myPlaces) {
         super(context, textViewResourceId);
         this.myPlaces = myPlaces;
     }
@@ -70,7 +66,6 @@ public class CardPlaceArrayAdapter extends ArrayAdapter<Card> {
             viewHolder.image = row.findViewById(R.id.place_image);
             viewHolder.name = row.findViewById(R.id.place_name);
             viewHolder.address = row.findViewById(R.id.place_address);
-            viewHolder.calificacion = row.findViewById(R.id.place_calification);
             viewHolder.description = row.findViewById(R.id.place_description);
             viewHolder.propietario = row.findViewById(R.id.place_owner);
             viewHolder.deleteButton = row.findViewById(R.id.deletebutton);
@@ -79,15 +74,14 @@ public class CardPlaceArrayAdapter extends ArrayAdapter<Card> {
             viewHolder = (CardPlaceArrayAdapter.CardPlaceViewHolder) row.getTag();
         }
         Card card = getItem(position);
-        double score = 3.5;//CAMBIAR AL HACER CALIFICACIONES
         Picasso.get().load(card.getUrlImage()).into(viewHolder.image);
         viewHolder.name.setText(card.getName());
         viewHolder.address.setText(String.format("%s, %s", card.getCity(), card.getDepartment()));
-        viewHolder.calificacion.setText(String.format("%s de 5", score));
         viewHolder.description.setText(card.getDescription());
         viewHolder.propietario.setText(card.getOwner());
         viewHolder.deleteButton.setOnClickListener(onClickListener -> {
             myPlaces.putItemSelectedId(card.getId());
+            myPlaces.deletePlace();
         });
         return row;
     }

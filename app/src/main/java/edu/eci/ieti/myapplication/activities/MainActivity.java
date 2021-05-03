@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             if(id==R.id.nav_misLugares){
-                Intent intent = new Intent(this, MyPlaces.class);
+                Intent intent = new Intent(this, MyPlacesActivity.class);
                 startActivity(intent);
             }
             //This is for maintaining the behavior of the Navigation view
