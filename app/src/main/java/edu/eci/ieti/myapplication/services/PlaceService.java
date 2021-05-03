@@ -16,6 +16,9 @@ public interface PlaceService {
     @GET("places")
     Call<List<Place>> searchPlaces(@Query("search") String search);
 
+    @GET("places/myplaces")
+    Call<List<Place>> myPlaces(@Header("X-Email")String email);
+
     @POST("places")
     Call<ResponseBody> addPlace(@Body Place place, @Header("X-Email")String email);
 }

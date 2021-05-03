@@ -2,7 +2,6 @@ package edu.eci.ieti.myapplication.ui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -24,26 +23,25 @@ import edu.eci.ieti.myapplication.activities.MyPlaces;
 import edu.eci.ieti.myapplication.activities.SearchActivity;
 import edu.eci.ieti.myapplication.model.Card;
 
-public class CardArrayAdapter extends ArrayAdapter<Card> {
+public class CardPlaceArrayAdapter extends ArrayAdapter<Card> {
 
     private final List<Card> cardList = new ArrayList<>();
-    private SearchActivity searchActivity;
+    private MyPlaces myPlaces;
 
-    static class CardViewHolder {
+    static class CardPlaceViewHolder {
         ImageView image;
         TextView name;
         TextView address; // department+city
         TextView calificacion;
         TextView description;
         TextView propietario;
-        Button bookButton;
+        Button deleteButton;
     }
 
-    public CardArrayAdapter(Context context, int textViewResourceId, SearchActivity searchActivity) {
+    public CardPlaceArrayAdapter(Context context, int textViewResourceId, MyPlaces myPlaces) {
         super(context, textViewResourceId);
-        this.searchActivity = searchActivity;
+        this.myPlaces = myPlaces;
     }
-
 
     @Override
     public void add(Card object) {
@@ -64,21 +62,21 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        CardViewHolder viewHolder;
+        CardPlaceArrayAdapter.CardPlaceViewHolder viewHolder;
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.list_item_card, parent, false);
-            viewHolder = new CardViewHolder();
+            row = inflater.inflate(R.layout.list_item_card_place, parent, false);
+            viewHolder = new CardPlaceArrayAdapter.CardPlaceViewHolder();
             viewHolder.image = row.findViewById(R.id.place_image);
             viewHolder.name = row.findViewById(R.id.place_name);
             viewHolder.address = row.findViewById(R.id.place_address);
             viewHolder.calificacion = row.findViewById(R.id.place_calification);
             viewHolder.description = row.findViewById(R.id.place_description);
             viewHolder.propietario = row.findViewById(R.id.place_owner);
-            viewHolder.bookButton = row.findViewById(R.id.makebookButton);
+            viewHolder.deleteButton = row.findViewById(R.id.deletebutton);
             row.setTag(viewHolder);
         } else {
-            viewHolder = (CardViewHolder) row.getTag();
+            viewHolder = (CardPlaceArrayAdapter.CardPlaceViewHolder) row.getTag();
         }
         Card card = getItem(position);
         double score = 3.5;//CAMBIAR AL HACER CALIFICACIONES
@@ -88,10 +86,8 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         viewHolder.calificacion.setText(String.format("%s de 5", score));
         viewHolder.description.setText(card.getDescription());
         viewHolder.propietario.setText(card.getOwner());
-        viewHolder.bookButton.setOnClickListener(onClickListener -> {
-            searchActivity.putItemSelectedId(card.getId());
-            Intent intent = new Intent(searchActivity.getApplicationContext(), AddBookActivity.class);
-            searchActivity.startActivity(intent);
+        viewHolder.deleteButton.setOnClickListener(onClickListener -> {
+            myPlaces.putItemSelectedId(card.getId());
         });
         return row;
     }
@@ -99,6 +95,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
     public Bitmap decodeToBitmap(byte[] decodedByte) {
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
+
 
 
 }
