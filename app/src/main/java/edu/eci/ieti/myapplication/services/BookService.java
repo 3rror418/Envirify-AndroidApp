@@ -19,4 +19,7 @@ public interface BookService {
 
     @POST("books")
     Call<ResponseBody> addBook(@Body CreateBook book, @Header("X-Email") String email, @Header("Authorization") String token);
+
+    @GET("users/{email}/books")
+    Call<List<Book>> bookingsToMe(@Path("email") String email);
 }
