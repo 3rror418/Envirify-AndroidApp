@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.EditProfileActivity">
+
+  <EditText
+      android:id="@+id/editTextTextEmailAddress"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginEnd="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginBottom="50dp"
+      android:ems="15"
+      android:hint="Correo"
+      android:inputType="textEmailAddress"
+      app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+  <EditText
+      android:id="@+id/editTextPhone"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginEnd="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginBottom="50dp"
+      android:ems="15"
+      android:hint="Teléfono"
+      android:inputType="phone"
+      app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonGenre"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+
+  <TextView
+      android:id="@+id/textViewEditProfile"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="150dp"
+      android:layout_marginLeft="150dp"
+      android:layout_marginTop="110dp"
+      android:layout_marginEnd="150dp"
+      android:layout_marginRight="150dp"
+      android:layout_marginBottom="50dp"
+      android:text="Edita Tu Perfil"
+      app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <EditText
+      android:id="@+id/editTextTextPersonName"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginEnd="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginBottom="50dp"
+      android:ems="15"
+      android:hint="Nombre"
+      android:inputType="textPersonName"
+      app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textViewEditProfile" />
+
+  <EditText
+      android:id="@+id/editTextTextPersonGenre"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="50dp"
+      android:layout_marginLeft="50dp"
+      android:layout_marginEnd="50dp"
+      android:layout_marginRight="50dp"
+      android:layout_marginBottom="291dp"
+      android:ems="15"
+      android:hint="Género"
+      android:inputType="textPersonName"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+  <ImageView
+      android:id="@+id/imageView4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="121dp"
+      android:layout_marginLeft="121dp"
+      android:layout_marginTop="50dp"
+      android:layout_marginEnd="121dp"
+      android:layout_marginRight="121dp"
+      android:layout_marginBottom="50dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonGenre"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@drawable/descarga" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
