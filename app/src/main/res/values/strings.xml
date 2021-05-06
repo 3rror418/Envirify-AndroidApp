@@ -36,5 +36,6 @@
     <string name="register_confirm_password">Confirm Password</string>
     <string name="register_button">SIGN UP</string>
     <string name="register_genre">Genre (Please type : Male , Female or Other)</string>
+    <string name="editProfile_button">Editar</string>
 
 </resources>
