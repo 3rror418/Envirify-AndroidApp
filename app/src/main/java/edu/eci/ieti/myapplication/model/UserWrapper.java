@@ -1,17 +1,75 @@
 package edu.eci.ieti.myapplication.model;
 
+import java.util.List;
+
 public class UserWrapper {
 
     private String email;
     private String name;
-    private String phone;
-    private String genre;
+    private String phoneNumber;
+    private String gender;
+    private String password;
+    private List<String> chats;
+    private List<String> books;
+    private List<String> places;
 
-    public UserWrapper(String email, String name, String genre, String phone) {
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<String> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<String> chats) {
+        this.chats = chats;
+    }
+
+    public List<String> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<String> books) {
+        this.books = books;
+    }
+
+    public List<String> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<String> places) {
+        this.places = places;
+    }
+
+    public UserWrapper(String email, String name, String gender, String phoneNumber, String password, List<String> chats, List<String> books, List<String> places) {
         this.email = email;
         this.name = name;
-        this.phone = phone;
-        this.genre = genre;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        this.password = password;
+        this.books = books;
+        this.chats = chats;
+        this.places = places;
     }
 
     public String getEmail() {
@@ -23,11 +81,11 @@ public class UserWrapper {
     }
 
     public String getGenre() {
-        return genre;
+        return gender;
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        this.gender = genre;
     }
 
     public String getName() {
@@ -39,11 +97,11 @@ public class UserWrapper {
     }
 
     public String getPhone() {
-        return phone;
+        return phoneNumber;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phoneNumber = phone;
     }
 
 }

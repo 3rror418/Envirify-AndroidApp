@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,15 +25,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ViewProfileActivity extends AppCompatActivity {
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
-
     private SharedPreferences sharedPreferences;
-
     private UserService userService;
-
     private TextView textViewEmail;
     private TextView textViewPhone;
     private TextView textViewGenre;
     private TextView textViewName;
+    public static final String USERNAME_PASSWORD = "USERNAME_PASSWORD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,12 @@ public class ViewProfileActivity extends AppCompatActivity {
                 System.out.println(response.body());
                 runOnUiThread(() -> {
                     if (response.isSuccessful()) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString(USERNAME_PASSWORD, userResponse.getPassword());
                         textViewGenre.setText(userResponse.getGender());
                         textViewName.setText(userResponse.getName());
                         textViewPhone.setText(userResponse.getPhoneNumber());
+
                     } else {
                         textViewGenre.setError("Error");
                     }

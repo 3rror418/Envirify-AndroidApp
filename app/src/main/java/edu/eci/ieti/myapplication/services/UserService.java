@@ -14,5 +14,5 @@ public interface UserService {
     Call<UserResponse> get(@Path("email") String email);
 
     @PUT("users")
-    Call<Object> edit(@Body UserWrapper userWrapper);
+    Call<UserWrapper> edit(@Body UserWrapper userWrapper);
 }

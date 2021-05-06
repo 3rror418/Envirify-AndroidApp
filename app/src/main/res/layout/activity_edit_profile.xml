@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".activities.EditProfileActivity">
 
+  <Button
+      android:id="@+id/button3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="50dp"
+      android:layout_marginEnd="50dp"
+      android:layout_marginRight="50dp"
+      android:onClick="editProfile"
+      android:text="@string/editProfile_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonGenre" />
+
   <EditText
       android:id="@+id/editTextTextEmailAddress"
       android:layout_width="0dp"
@@ -47,7 +59,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="150dp"
       android:layout_marginLeft="150dp"
-      android:layout_marginTop="110dp"
+      android:layout_marginTop="140dp"
       android:layout_marginEnd="150dp"
       android:layout_marginRight="150dp"
       android:layout_marginBottom="50dp"
@@ -95,17 +107,18 @@
       android:id="@+id/imageView4"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="121dp"
-      android:layout_marginLeft="121dp"
+      android:layout_marginStart="50dp"
+      android:layout_marginLeft="50dp"
       android:layout_marginTop="50dp"
       android:layout_marginEnd="121dp"
       android:layout_marginRight="121dp"
       android:layout_marginBottom="50dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonGenre"
-      app:layout_constraintVertical_bias="1.0"
+      app:layout_constraintVertical_bias="0.464"
       app:srcCompat="@drawable/descarga" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
