@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USERNAME_ID = "USERNAME_ID";
     public static final String USERNAME_EMAIL = "USERNAME_EMAIL";
 
-
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -58,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString(LaunchActivity.TOKEN_KEY, loginResponse.getJwt());
+                            System.out.println(loginResponse.toString());
                             editor.putString(USERNAME_EMAIL, loginResponse.getEmail());
                             editor.putString(USERNAME_ID, loginResponse.getId());
                             editor.apply();
