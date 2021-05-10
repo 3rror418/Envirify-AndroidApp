@@ -19,6 +19,7 @@ import java.util.List;
 
 import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.activities.AddBookActivity;
+import edu.eci.ieti.myapplication.activities.AddReviewActivity;
 import edu.eci.ieti.myapplication.activities.SearchActivity;
 import edu.eci.ieti.myapplication.model.Card;
 
@@ -35,6 +36,7 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         TextView description;
         TextView propietario;
         Button bookButton;
+        Button reviewButton;
     }
 
     public CardArrayAdapter(Context context, int textViewResourceId, SearchActivity searchActivity) {
@@ -74,12 +76,13 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
             viewHolder.description = row.findViewById(R.id.place_description);
             viewHolder.propietario = row.findViewById(R.id.place_owner);
             viewHolder.bookButton = row.findViewById(R.id.makebookButton);
+            viewHolder.reviewButton = row.findViewById(R.id.add_review_button);
             row.setTag(viewHolder);
         } else {
             viewHolder = (CardViewHolder) row.getTag();
         }
         Card card = getItem(position);
-        double score = 3.5;//CAMBIAR AL HACER CALIFICACIONES
+        double score = 3.5;
         Picasso.get().load(card.getUrlImage()).into(viewHolder.image);
         viewHolder.name.setText(card.getName());
         viewHolder.address.setText(String.format("%s, %s", card.getCity(), card.getDepartment()));
@@ -89,6 +92,12 @@ public class CardArrayAdapter extends ArrayAdapter<Card> {
         viewHolder.bookButton.setOnClickListener(onClickListener -> {
             searchActivity.putItemSelectedId(card.getId());
             Intent intent = new Intent(searchActivity.getApplicationContext(), AddBookActivity.class);
+            searchActivity.startActivity(intent);
+        });
+
+        viewHolder.reviewButton.setOnClickListener(onClickListener -> {
+            searchActivity.putItemSelectedId(card.getId());
+            Intent intent = new Intent(searchActivity.getApplicationContext(), AddReviewActivity.class);
             searchActivity.startActivity(intent);
         });
         return row;

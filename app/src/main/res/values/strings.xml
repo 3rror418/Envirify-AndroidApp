@@ -37,5 +37,9 @@
     <string name="register_button">SIGN UP</string>
     <string name="register_genre">Genre (Please type : Male , Female or Other)</string>
     <string name="editProfile_button">Editar</string>
+    <string name="add_review_title">Tell us about your experience!</string>
+    <string name="add_review_description">Tell us about your experience here</string>
+    <string name="add_review_calification">Choose how many stars you rate your experience with!</string>
+    <string name="add_review_button">Tell us about your experience</string>
 
 </resources>
