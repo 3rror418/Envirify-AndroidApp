@@ -10,6 +10,8 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.model.RegisterWrapper;
@@ -45,8 +47,14 @@ public class ActivityRegister extends AppCompatActivity {
         String number = editRegisterNumber.getText().toString();
         String password = editRegisterPassword.getText().toString();
         String confirmPassword = editRegisterConfirmPassword.getText().toString();
-
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
         boolean error = false;
+        if(!matcher.matches()){
+            editRegisterEmail.setError("Please enter a valid email");
+            error = true;
+        }
         if (email.isEmpty()){
             editRegisterEmail.setError("This field can not be blank");
             error = true;
