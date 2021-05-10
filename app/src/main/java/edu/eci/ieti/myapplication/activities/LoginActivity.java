@@ -12,6 +12,8 @@ import android.widget.EditText;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.eci.ieti.myapplication.R;
 import edu.eci.ieti.myapplication.model.LoginWrapper;
@@ -46,6 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         loadComponents();
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if(!matcher.matches()){
+            editTextEmail.setError("Please enter a valid email");
+        }
         if (email.isEmpty()) editTextEmail.setError("This field can not be blank");
         if (password.isEmpty()) editTextPassword.setError("This field can not be blank");
         if (!email.isEmpty() && !password.isEmpty()) {
