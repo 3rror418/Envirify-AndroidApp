@@ -67,6 +67,8 @@ public class ReviewCardArrayAdapter extends ArrayAdapter<ReviewCard> {
         viewHolder.name.setText(card.getOwner());
         viewHolder.rating.setNumStars(5);
         viewHolder.rating.setRating(card.getQualification());
+        viewHolder.rating.setIsIndicator(true);
+        viewHolder.rating.setFocusable(false);
         viewHolder.comment.setText(card.getComment());
         return row;
     }
