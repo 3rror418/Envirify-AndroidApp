@@ -13,6 +13,9 @@ public class Card {
     private int capacity;
     private int habitations;
     private int bathrooms;
+    private int score;
+
+
 
     public Card() {
     }
@@ -29,6 +32,29 @@ public class Card {
         this.capacity = place.getCapacity();
         this.habitations = place.getHabitations();
         this.bathrooms = place.getBathrooms();
+    }
+
+    public Card(Place place , int score) {
+        this.id = place.getId();
+        this.name = place.getName();
+        this.department = place.getDepartment();
+        this.city = place.getCity();
+        this.direction = place.getDirection();
+        this.description = place.getDescription();
+        this.urlImage = place.getUrlImage();
+        this.owner = place.getOwner();
+        this.capacity = place.getCapacity();
+        this.habitations = place.getHabitations();
+        this.bathrooms = place.getBathrooms();
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getId() {
